@@ -1,3 +1,4 @@
+import axios from 'axios';
 import './App.css'
 import { useSupabase } from './hooks/useSupabase';
 import { useUser } from './hooks/useUser'
@@ -10,7 +11,7 @@ function App() {
   return (
     <>
       <div>
-       { !claims &&<button
+       {!claims &&<button
        onClick={async()=>{
        await supabase.auth.signInWithWeb3({
           chain:"solana",
@@ -34,7 +35,18 @@ function App() {
        }}
        >Logout</button>}
       </div>
-      {JSON.stringify(claims)}
+      <button onClick={async()=>{
+        
+        await supabase.auth.getSession().then(r=>{
+          console.log(r.data.session?.access_token)
+           axios.post("http://localhost:3000/buy",
+          {},{
+            headers:{
+              Authorization:r.data.session?.access_token
+            }
+          })
+        })
+      }} >Click here to buy</button>
     </>
   )
 }
