@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import { middleware } from "./middleware";
+import {prisma} from "db"
 
 const app=express();
 
@@ -11,7 +12,7 @@ app.use(cors());
 
 
 app.post("/buy",middleware,async(req,res)=>{
-    res.json({message:"HI"})
+    prisma.market.findFirst();
 
 })
 

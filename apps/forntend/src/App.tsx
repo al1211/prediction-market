@@ -1,4 +1,3 @@
-import axios from 'axios';
 import './App.css'
 import { useSupabase } from './hooks/useSupabase';
 import { useUser } from './hooks/useUser'
@@ -35,19 +34,8 @@ function App() {
        }}
        >Logout</button>}
       </div>
-      <button onClick={async()=>{
-        
-        await supabase.auth.getSession().then(r=>{
-          console.log(r.data.session?.access_token)
-           axios.post("http://localhost:3000/buy",
-          {},{
-            headers:{
-              Authorization:r.data.session?.access_token
-            }
-          })
-        })
-      }} >Click here to buy</button>
-    </>
+    
+          </>
   )
 }
 
