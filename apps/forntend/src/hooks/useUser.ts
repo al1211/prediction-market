@@ -1,35 +1,24 @@
+import { SupabaseClient } from "@supabase/supabase-js"
 import { useEffect, useState } from "react";
-import { useSupabase } from "./useSupabase";
 
-export function useUser() {
-  const [claims, setClaims] = useState(null);
 
-  const supabase = useSupabase();
+export function useUser(supabase: SupabaseClient) {
+    const [claims, setClaims] = useState<any>(null);
 
-  useEffect(() => {
-    const getUserClaims = async () => {
-      const { data, error } = await supabase.auth.getClaims();
+    useEffect(() => {
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange(() => {
+            supabase.auth.getClaims().then(({ data }) => {
+                setClaims(data?.claims || null)
+            }).catch(e => console.log(e));
+        })
 
-      if (error) {
-        console.log(error.message);
-        return;
-      }
+        return () => subscription.unsubscribe()
+    }, [supabase])
 
-      setClaims(data?.claims ?? null);
-    };
+    return {
+        claims
+    }
 
-    getUserClaims();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
-      getUserClaims();
-    });
-
-    return () => subscription.unsubscribe();
-  }, [supabase]);
-
-  return {
-    claims,
-  };
 }

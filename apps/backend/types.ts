@@ -14,3 +14,14 @@ export type OrderBook={[key:string]:{
     order:{userId:string,qty:number,filledQty:number,orignalOrderId:string,reverseOrder:boolean}[],
 
 }}
+
+export const SplitSchema=z.object({
+        marketId:z.string(),
+        amount:z.number(),
+        
+})
+
+export const MergeSchema=z.object({
+    marketId:z.string(),
+    amount:z.number(),
+})
