@@ -1,11 +1,13 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
+  "globalEnv":["DATABASE_URL"],
   "ui": "tui",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
+      
     },
     "lint": {
       "dependsOn": ["^lint"]

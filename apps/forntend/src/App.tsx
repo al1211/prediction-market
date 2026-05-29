@@ -34,6 +34,7 @@ function App() {
        }}
        >Logout</button>}
       </div>
+      {JSON.stringify(claims)}
     
           </>
   )

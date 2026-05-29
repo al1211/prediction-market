@@ -8,13 +8,19 @@
   },
   "peerDependencies": {
     "typescript": "^5",
-    "db":"*"
+    "db": "*"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "uuidv4": "^6.2.13",
+    "zod": "^4.4.3"
+  },
+  "scripts": {
+    "dev": "bun --env-file=.env --env-file=../../packages/db/.env index.ts"
   }
 }
