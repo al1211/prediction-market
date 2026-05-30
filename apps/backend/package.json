@@ -17,10 +17,12 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "uuid": "^14.0.0",
     "uuidv4": "^6.2.13",
     "zod": "^4.4.3"
   },
   "scripts": {
-    "dev": "bun --env-file=.env --env-file=../../packages/db/.env index.ts"
+    "dev": "bun --env-file=.env --env-file=../../packages/db/.env index.ts",
+    "seed": "bun --env-file=.env --env-file=../../packages/db/.env seed.ts"
   }
 }

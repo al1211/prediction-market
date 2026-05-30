@@ -22,8 +22,8 @@ declare global {
 
 function App() {
   const [supabase] = useState(createClient(
-    "https://sgvenstbkiedwlmctkym.supabase.co",
-    "sb_publishable_UzrNN841hMRh49RkCtCvbA_5ayRmeRN"
+    "https://bmoimxwajimlcrstoebw.supabase.co",
+    "sb_publishable_5DbEEycmKjiwluGNhGRAIw_63cpsCzq"
   ));
   return <AppWrapper supabase={supabase} />;
 }
@@ -52,9 +52,11 @@ function AppWrapper({ supabase }: { supabase: SupabaseClient }) {
 
   const fetchMarkets = async () => {
     try {
-      const response = await fetch("http://localhost:3000/markets");
+      const response = await fetch("http://localhost:3000/market");
       const data = await response.json();
-      const nextMarkets = data.markets || [];
+      console.log(data);
+      const nextMarkets = data.market || [];
+      console.log(nextMarkets)
       setMarkets(nextMarkets);
       setSelectedMarket((current) => (
         current ? nextMarkets.find((market: Market) => market.id === current.id) || current : current
@@ -164,42 +166,7 @@ function AppWrapper({ supabase }: { supabase: SupabaseClient }) {
         </button>
       </nav>
 
-      <nav className="app-nav">
-        <button
-          className={activeTab === "markets" ? "active" : ""}
-          onClick={() => {
-            setActiveTab("markets");
-            setSelectedMarket(null);
-          }}
-        >
-          Markets
-        </button>
-        <button
-          className={activeTab === "trading" ? "active" : ""}
-          onClick={() => setActiveTab("trading")}
-          disabled={!selectedMarket}
-        >
-          Trading
-        </button>
-        <button
-          className={activeTab === "balance" ? "active" : ""}
-          onClick={() => setActiveTab("balance")}
-        >
-          Balance
-        </button>
-        <button
-          className={activeTab === "positions" ? "active" : ""}
-          onClick={() => setActiveTab("positions")}
-        >
-          Positions
-        </button>
-        <button
-          className={activeTab === "history" ? "active" : ""}
-          onClick={() => setActiveTab("history")}
-        >
-          History
-        </button>
-      </nav>
+      
 
       <main className="app-main">
         {activeTab === "markets" && (

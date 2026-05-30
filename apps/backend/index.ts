@@ -693,13 +693,15 @@ app.get("/", async (req: Request, res: Response) => {
 })
 
 app.get("/market", async (req: Request, res: Response) => {
-    const market = await prisma.market.findFirst({
+    const market=await prisma.market.findMany();
+    res.json({market})
+    // const market = await prisma.market.findFirst({
 
-        where: {
-            id: req.query.marketId as string
-        }
-    })
-    res.json({ market })
+    //     where: {
+    //         id: req.query.marketId as string
+    //     }
+    // })
+    // res.json({ market })
 })
 
 
